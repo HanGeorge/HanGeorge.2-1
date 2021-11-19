@@ -1,68 +1,129 @@
-#   a123_apple_1.py
 import turtle as trtl
 import random as rand
 
 #-----setup-----
-apple_image = "pear.gif" # Store the file name of your shape
+apple_image = "apple.gif" # Store the file name of your shape
 
 wn = trtl.Screen()
-wn.bgpic("background.gif")
 wn.setup(width=1.0, height=1.0)
 wn.addshape(apple_image) # Make the screen aware of the new file
+wn.bgpic("background.gif")
 
-apple = trtl.Turtle()
-def new_spot():
-    apple.showturtle()
-    new_xpos=rand.randint(-100,100)
-    new_ypos=rand.randint(-100, 100) 
-    
-    apple.goto(new_xpos,new_ypos)
+letters = ["A", "S", "D", "F", "H" , "H", "J","K", "L"]
 
-#apple.right (90)
-#apple.forward(200)
 
-def roll():
-    apple_xcor=rand. randint(-200,200)
-    apple_ycor=-200
-    apple.goto(apple_xcor, apple_ycor)
-    apple.hideturtle()
-#-----functions-----
-# given a turtle, set that turtle to be shaped by the image file
+apple_list = []
+apple_letters = []
 
-def draw_apple(active_apple):
-  apple.penup()
-  active_apple.shape(apple_image)
-  roll()
-  new_spot()
-  
+for i in range (5):
+  apple_list.append(trtl.Turtle())
+  apple_letters.append(rand.choice(letters))
+
+
+
+def draw_apple(index):
+  apple_list[index].penup()
+  apple_list[index].shape(apple_image)
+  wn.tracer(False)
+  apple_list[index].setx(rand.randint(-150,150))
+  apple_list[index].sety(rand.randint(-15,100))
+  apple_list[index].sety(apple_list[index].ycor()-30)
+  apple_list[index].color("white")
+  apple_list[index].write(apple_letters[index], align = "center", font=("Arial", 30, "bold")) 
+  apple_list[index].sety(apple_list[index].ycor()+30)
+  apple_list[index].showturtle()
+  wn.tracer(True)
   wn.update()
 
-def drop_fruit(): 
-    draw_apple()
+def drop_apple(index):
+  apple_list[index].penup()
+  apple_list[index].clear()
+  apple_list[index].sety(-150)
+  apple_list[index].hideturtle()
+#-----functions-----
+# given a turtle, set that turtle to be shaped by the image file
+def draw_apple(active_apple):
+  active_apple.shape(apple_image)
+  drop_apple()
+  wn.tracer(False)
 
-wn.onkeypress(drop_fruit, "a")
-draw_apple(apple)
+
+######################################
+letters = ["A", "S", "D", "F", "H" , "H", "J","K", "L"]
+
+
+apple_list = []
+apple_letters = []
+
+
+def drop_apple(index):
+  apple_list[index].penup()
+  apple_list[index].clear()
+  apple_list[index].sety(-150)
+  apple_list[index].hideturtle()
+  #draw_apple(index)
+
+def typedA():
+  for i in range (5):
+   if apple_letters[i] == "A":
+    drop_apple(i)
+
+def typedS():
+  for i in range (5):
+   if apple_letters[i] == "S":
+    drop_apple(i)
+
+def typedD():
+  for i in range (5):
+   if apple_letters[i] == "D":
+    drop_apple(i)
+
+def typedF():
+  for i in range (5):
+   if apple_letters[i] == "F":
+    drop_apple(i)
+
+def typedG():
+  for i in range (5):
+   if apple_letters[i] == "G":
+    drop_apple(i)
+
+
+def typedH():
+  for i in range (5):
+   if apple_letters[i] == "H":
+    drop_apple(i)
+
+def typedJ():
+  for i in range (5):
+   if apple_letters[i] == "J":
+    drop_apple(i)
+    
+def typedK():
+  for i in range (5):
+   if apple_letters[i] == "K":
+    drop_apple(i)
+
+def typedL():
+  for i in range (5):
+   if apple_letters[i] == "L":
+    drop_apple(i)
+
 
 #-----function calls-----
-drawer = trtl.Turtle()
+for i in range (5):
+  draw_apple(i)
 
-# This function takes care of font and color.
-def draw_an_A():
-  drawer.color("blue")
-  drawer.write("A", font=("Arial", 74, "bold")) 
+wn.onkeypress(typedA, "a")
+wn.onkeypress(typedS, "s")
+wn.onkeypress(typedD, "d")
+wn.onkeypress(typedF, "f")
+wn.onkeypress(typedG, "g")
+wn.onkeypress(typedH, "h")
+wn.onkeypress(typedJ, "j")
+wn.onkeypress(typedK, "k")
+wn.onkeypress(typedL, "l")
 
-# This call to the onkeypress function sets draw_an_A as the function
-# that will be called when the "a" key is pressed.
-wn.onkeypress(draw_an_A, "a")
-draw_apple(apple)
 wn.listen()
 
 wn.mainloop()
-
-#-----function calls-----
-
-
-
-# This call to the onkeypress function sets draw_an_A as the function
-# that will be called when the "a" key is pressed.
-
